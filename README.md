@@ -46,4 +46,4 @@ android_app/
         ├── s3.py           # Генерация ссылок, загрузка/скачивание
         ├── groq.py         # Клиент к Groq API (transcribe, analyze)
         └── google_sheets.py # Логика записи в таблицу
-```v
+```
