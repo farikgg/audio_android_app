@@ -1,7 +1,7 @@
 ## Стек инструментов
 
 🖥 Backend
-- Language: Python 3.10+.
+- Language: Python 3.11+.
 - Framework: FastAPI.
 - Database: PostgreSQL (драйвер asyncpg).
 - ORM: SQLAlchemy 2.0 + Alembic (миграции).
