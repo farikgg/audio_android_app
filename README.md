@@ -38,7 +38,6 @@ android_app/
     │   └── dependencies.py # dependency injections проекта
     │
     ├── visits/             
-    │   ├── router.py       # API Endpoints (POST /visit, GET /upload-url)
     │   ├── schemas.py      # Pydantic (VisitCreate, VisitResponse, ReportJSON)
     │   ├── models.py       # SQLAlchemy (class Visit)
     │   ├── service.py      # CRUD логика, бизнес-правила

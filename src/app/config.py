@@ -28,6 +28,12 @@ class _ProjectBaseSettings(BaseSettings):
     )
 
 
+class GoogleSheetsSettings(_ProjectBaseSettings):
+    credentials_path: str = Field(..., alias="GOOGLE_SHEETS_CREDENTIALS_PATH")
+    spreadsheet_id: str = Field(..., alias="GOOGLE_SHEETS_ID")
+    worksheet_name: str = Field(..., alias="GOOGLE_SHEETS_WORKSHEET")
+
+
 class GroqSettings(_ProjectBaseSettings):
     api_key: str = Field(default="", alias="GROQ_API_KEY")
 
@@ -45,6 +51,7 @@ class AppSettings(_ProjectBaseSettings):
     app_name: str = Field(default="Android App with AI analyzer")
     debug: bool = Field(default=False, validation_alias="APP_DEBUG")
     groq_settings: GroqSettings = Field(default_factory=GroqSettings)
+    google_sheets_settings: GoogleSheetsSettings = Field(default_factory=GoogleSheetsSettings)
 
 @lru_cache
 def get_settings() -> AppSettings:
