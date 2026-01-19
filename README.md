@@ -28,8 +28,14 @@ android_app/
 ├── .env                    # GROQ_API_KEY, DB_URL, S3_KEYS
 │
 └── src/
-    ├── main.py             # Точка входа FastAPI
-    ├── config.py           # Pydantic Settings (все конфиги тут)
+    ├── app/
+    │   ├── main.py         # Точка входа FastAPI
+    │   └── config.py       # Pydantic Settings (все конфиги тут)
+    │
+    ├── api/
+    │   ├── v1/
+    │   │   └── ai_endpoints.py # endpoints для ИИ 
+    │   └── dependencies.py # dependency injections проекта
     │
     ├── visits/             
     │   ├── router.py       # API Endpoints (POST /visit, GET /upload-url)
@@ -37,6 +43,9 @@ android_app/
     │   ├── models.py       # SQLAlchemy (class Visit)
     │   ├── service.py      # CRUD логика, бизнес-правила
     │   └── dependencies.py # Получение сессии БД
+    │
+    ├── data/
+    │   └── google-sheets-credentials # Ключи для выгрузки анализа в Google Sheets
     │
     ├── worker/             # Фоновые задачи
     │   ├── celery.py       # Настройка Celery app
