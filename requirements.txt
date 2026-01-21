@@ -7,6 +7,7 @@ python-multipart>=0.0.9 # Нужно для приема файлов (UploadFil
 sqlalchemy>=2.0.28
 alembic>=1.13.1
 asyncpg>=0.29.0
+greenlet==3.3.0
 
 celery>=5.3.6
 redis>=5.0.3
