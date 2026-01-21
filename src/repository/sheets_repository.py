@@ -15,8 +15,7 @@ class GoogleSheetsRepository:
         return await self._client.get_worksheet()
 
     async def append_visit(self, row_data: list[Any]) -> None:
-        """row_data: [Торговый представитель, анализ ИИ]"""
-        # TODO: Сделать DTO (Pydantic модель) для row_data, сохранять порядок элементов
+        """row_data: [ФИО, Геолокация, Анализ ИИ, Дата создания]"""
         worksheet = await self._get_worksheet()
         try:
             await worksheet.append_row(row_data)

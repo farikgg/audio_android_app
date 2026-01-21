@@ -5,6 +5,7 @@ from src.infrastructure.google_sheets import GoogleSheetsClient
 from src.infrastructure.groq import GroqAnalyzer, GroqTranscriber
 from src.repository.sheets_repository import GoogleSheetsRepository
 
+
 @lru_cache
 def get_groq_analyzer() -> GroqAnalyzer:
     return GroqAnalyzer()

@@ -56,8 +56,10 @@ class GoogleSheetsClient:
             return
 
         headers = [
-            "Вердикт от ИИ",
             "Торговый представитель",
+            "Местоположение",
+            "Вердикт от ИИ",
+            "Дата посещения"
         ]
 
         await self._worksheet.append_row(headers)

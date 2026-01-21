@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 
-from src.api.dependencies import get_groq_analyzer, get_groq_transcriber
+from src.core.dependencies import get_groq_analyzer, get_groq_transcriber
 from src.infrastructure.groq import GroqAnalyzer, GroqTranscriber
 
 

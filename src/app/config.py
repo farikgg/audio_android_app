@@ -27,6 +27,9 @@ class _ProjectBaseSettings(BaseSettings):
         extra="ignore",
     )
 
+class DataBaseSettings(_ProjectBaseSettings):
+    database_url: str = Field(..., alias="DATABASE_URL")
+
 
 class GoogleSheetsSettings(_ProjectBaseSettings):
     credentials_path: str = Field(..., alias="GOOGLE_SHEETS_CREDENTIALS_PATH")
@@ -52,6 +55,7 @@ class AppSettings(_ProjectBaseSettings):
     debug: bool = Field(default=False, validation_alias="APP_DEBUG")
     groq_settings: GroqSettings = Field(default_factory=GroqSettings)
     google_sheets_settings: GoogleSheetsSettings = Field(default_factory=GoogleSheetsSettings)
+    database_settings: DataBaseSettings = Field(default_factory=DataBaseSettings)
 
 @lru_cache
 def get_settings() -> AppSettings:
