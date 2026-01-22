@@ -1,5 +1,7 @@
-from datetime import datetime
-from pydantic import BaseModel, field_validator
+from datetime import datetime, timedelta, timezone
+from pydantic import BaseModel
+
+from src.core.constants import DATA_FORMAT
 
 
 class GoogleSheetsSchema(BaseModel):
@@ -8,16 +10,13 @@ class GoogleSheetsSchema(BaseModel):
     ai_analyze: str
     created_at: datetime
 
-    @field_validator("ai_analyze", mode="before")
-    def check_ai_analyze(self, ai_analyze) -> str:
-        if ai_analyze is None:
-            return "Идет обработка диалога"
-        return ai_analyze.get("analyze", "Галлюцинация ИИ")
-
     def to_list(self) -> list:
+        kz_timezone = timezone(timedelta(hours=5))
+        local_time = self.created_at.astimezone(kz_timezone)
+
         return [
             self.full_name,
             self.location,
             self.ai_analyze,
-            self.created_at
+            local_time.strftime(DATA_FORMAT),
         ]

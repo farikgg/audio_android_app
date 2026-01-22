@@ -14,7 +14,7 @@ from src.app.config import get_settings
 settings = get_settings()
 
 async_engine: AsyncEngine = create_async_engine(
-    settings.database_settings.database_url,
+    url=settings.database_settings.database_url,
     echo=True
 )
 
