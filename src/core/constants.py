@@ -11,3 +11,6 @@ GOOGLE_SHEETS_URLS = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
 ]
+
+# schemas/sheets_schema.py
+DATA_FORMAT = "%Y-%m-%d %H:%M:%S"
