@@ -15,7 +15,7 @@ settings = get_settings()
 
 async_engine: AsyncEngine = create_async_engine(
     url=settings.database_settings.database_url,
-    echo=True
+    echo=False
 )
 
 async_session_maker: async_sessionmaker[AsyncSession] = async_sessionmaker(

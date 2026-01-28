@@ -4,6 +4,7 @@ from src.core.dependencies import get_visit_service
 from src.schemas.visit_schema import VisitSchema
 from src.visits.models import Visit
 from src.visits.service import VisitService
+from src.worker.tasks import process_visits
 
 router = APIRouter(tags=["Groq Analyzer"])
 
@@ -17,11 +18,14 @@ async def transcribe(
 
     file_content = await file.read()
     filename = file.filename or "unknown_name.m4a"
-    result = await service.process_visit(
-        filename=filename,
+
+    visit: Visit = await service.create_visit(
         file_content=file_content,
+        filename=filename,
         full_name=full_name,
         location=location,
     )
 
-    return result
+    process_visits.delay(visit.id)
+
+    return visit

@@ -1,4 +1,5 @@
 from aiofiles import open as async_open
+from typing import Union
 from pathlib import Path
 from uuid import uuid4
 
@@ -10,6 +11,12 @@ class LocalStorage:
     def __init__(self) -> None:
         self.upload_dir = UPLOAD_DIR
         self.upload_dir.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    async def read_file(file_path: Union[Path, str]) -> bytes:
+        async with async_open(file_path, mode="rb") as file:
+            file_content: bytes = await file.read()
+        return file_content
 
     async def save_file(self, filename: str, content: bytes) -> str:
         """Сохраняет байты на диск и возвращает путь к файлу"""

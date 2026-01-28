@@ -27,8 +27,20 @@ class _ProjectBaseSettings(BaseSettings):
         extra="ignore",
     )
 
+
 class DataBaseSettings(_ProjectBaseSettings):
     database_url: str = Field(..., alias="DATABASE_URL")
+
+
+class RedisSettings(_ProjectBaseSettings):
+    redis_url: str = Field(..., alias="REDIS_URL")
+
+
+class S3Settings(_ProjectBaseSettings):
+    endpoint_url: str = Field(..., alias="S3_ENDPOINT_URL")
+    access_key: str = Field(..., alias="S3_ACCESS_KEY")
+    secret_key: str = Field(..., alias="S3_SECRET_KEY")
+    bucket: str = Field(..., alias="S3_BUCKET")
 
 
 class GoogleSheetsSettings(_ProjectBaseSettings):
@@ -56,6 +68,8 @@ class AppSettings(_ProjectBaseSettings):
     groq_settings: GroqSettings = Field(default_factory=GroqSettings)
     google_sheets_settings: GoogleSheetsSettings = Field(default_factory=GoogleSheetsSettings)
     database_settings: DataBaseSettings = Field(default_factory=DataBaseSettings)
+    redis_settings: RedisSettings = Field(default_factory=RedisSettings)
+    s3_settings: S3Settings = Field(default_factory=S3Settings)
 
 @lru_cache
 def get_settings() -> AppSettings:

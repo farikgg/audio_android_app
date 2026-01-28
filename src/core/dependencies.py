@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.database import get_async_session
 from src.infrastructure.storage import LocalStorage
+from src.infrastructure.s3_storage import S3Storage
 from src.infrastructure.google_sheets import GoogleSheetsClient
 from src.infrastructure.groq import GroqAnalyzer, GroqTranscriber
 from src.repository.sheets_repository import GoogleSheetsRepository
@@ -30,9 +31,13 @@ def get_google_sheets_repository(
 def get_local_storage() -> LocalStorage:
     return LocalStorage()
 
+@lru_cache
+def get_s3_storage() -> S3Storage:
+    return S3Storage()
+
 def get_visit_service(
         session: AsyncSession = Depends(get_async_session),
-        storage: LocalStorage = Depends(get_local_storage),
+        storage: S3Storage = Depends(get_s3_storage),
         transcriber: GroqTranscriber = Depends(get_groq_transcriber),
         analyzer: GroqAnalyzer = Depends(get_groq_analyzer),
         sheets_repo: GoogleSheetsRepository = Depends(get_google_sheets_repository)

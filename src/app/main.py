@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 
 from src.app.config import get_settings
 from src.api.v1 import ai_endpoints
-from src.core.database import async_engine, get_async_session
+from src.core.database import async_engine
 from src.core.logger import logger
 
 
@@ -31,3 +33,12 @@ def create_application() -> FastAPI:
     return application
 
 app = create_application()
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    error_details = exc.errors()
+    logger.error(f"❌ Ошибка валидации (422): {error_details}")
+    return JSONResponse(
+        status_code=422,
+        content={"detail": error_details},
+    )
