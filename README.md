@@ -13,7 +13,7 @@
 - STT (Speech-to-Text): Model whisper-large-v3.
 - LLM (Analysis): Model llama-3.3-70b-versatile.
 
-📱 Mobile <- Будем корректировать вместе с Алмазом
+📱 Mobile
 - Framework: React Native (через Expo Managed Workflow).
 - Audio: expo-av (запись в .m4a AAC, Mono, 16kHz, ~32-48kbps).
 - Network: TanStack Query (React Query) — для очередей синхронизации и кэширования.
